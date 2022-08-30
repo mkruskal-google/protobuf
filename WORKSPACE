@@ -33,6 +33,11 @@ http_archive(
     urls = ["https://github.com/bazelbuild/platforms/archive/da5541f26b7de1dc8e04c075c99df5351742a4a2.zip"],  # 2022-05-27
 )
 
+local_repository(
+    name = "rules_ruby",
+    path = "../rules_ruby",
+)
+
 # Load common dependencies.
 load("//:protobuf_deps.bzl", "PROTOBUF_MAVEN_ARTIFACTS", "protobuf_deps")
 protobuf_deps()
@@ -68,6 +73,20 @@ kotlin_repositories()
 
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 kt_register_toolchains()
+
+load("@rules_ruby//ruby:deps.bzl", "ruby_register_toolchains", "rules_ruby_dependencies")
+rules_ruby_dependencies()
+ruby_register_toolchains()
+
+load("@rules_ruby//ruby:defs.bzl", "rb_bundle")
+rb_bundle(
+    name = "protobuf_bundle",
+    bundler_version = "2.3.17",
+    gemfile = "//ruby:Gemfile",
+    gemfile_lock = "//ruby:Gemfile.lock",
+    gemspec = "//ruby:google-protobuf.gemspec",
+    full_index = True,
+)
 
 load("@upb//bazel:workspace_deps.bzl", "upb_deps")
 upb_deps()

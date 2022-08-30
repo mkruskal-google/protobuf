@@ -21,8 +21,8 @@ def internal_ruby_extension(
         srcs = deps + [
             "Rakefile",
             ":srcs",
-            ":test_ruby_protos",
-            ":tests",
+            #":test_ruby_protos",
+            #":tests",
             "//third_party/utf8_range:all_files",
         ],
         tags = ["manual"],
