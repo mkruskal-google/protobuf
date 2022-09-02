@@ -3,7 +3,7 @@
 # See also code generation logic under /src/google/protobuf/compiler/ruby.
 
 load("@rules_pkg//:mappings.bzl", "pkg_files", "strip_prefix")
-load("@rules_ruby//ruby:defs.bzl", "rb_library", "rb_test")
+load("@rules_ruby//ruby:defs.bzl", "ruby_library", "ruby_test", "ruby_gem")
 load("//:protobuf.bzl", "internal_ruby_proto_library")
 load("//build_defs:internal_shell.bzl", "inline_sh_test")
 load("//conformance:defs.bzl", "conformance_test")
@@ -83,16 +83,20 @@ filegroup(
     ],
 )
 
-rb_library(
+ruby_library(
     name = "protobuf_lib",
     srcs = glob([
         "lib/**/*.rb",
     ]),
     deps = [
-        "@protobuf_bundle//:test-unit"
+        #"protobuf_gem",
+        #"@protobuf_bundle//:test-unit"
     ],
     includes = ["ruby/lib"],
-    data = [":protobuf"],
+    data = [
+        "lib/google/protobuf_c.so",
+        "ext/google/protobuf_c/extconf.rb",
+    ],
     visibility = [
         "//conformance:__subpackages__",
         "//ruby:__subpackages__",
@@ -102,11 +106,6 @@ rb_library(
 ################################################################################
 # Tests
 ################################################################################
-
-filegroup(
-  name = "test_protos",
-  srcs = glob(["tests/*.proto"]),
-)
 
 # Define this here so the descriptor paths match what we get in Rake tests.
 internal_ruby_proto_library(
@@ -120,7 +119,6 @@ internal_ruby_proto_library(
 )
 
 
-"""
 conformance_test(
     name = "conformance_test",
     failure_list = "//conformance:failure_list_ruby.txt",
@@ -142,8 +140,6 @@ conformance_test(
         "//conditions:default": ["@platforms//:incompatible"],
     }),
 )
-
-"""
 
 ################################################################################
 # Distribution files

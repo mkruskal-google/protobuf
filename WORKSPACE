@@ -35,7 +35,7 @@ http_archive(
 
 local_repository(
     name = "rules_ruby",
-    path = "../rules_ruby",
+    path = "../rules_ruby-2",
 )
 
 # Load common dependencies.
@@ -74,18 +74,16 @@ kotlin_repositories()
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 kt_register_toolchains()
 
-load("@rules_ruby//ruby:deps.bzl", "ruby_register_toolchains", "rules_ruby_dependencies")
+load("@rules_ruby//ruby:deps.bzl", "rules_ruby_select_sdk", "rules_ruby_dependencies")
 rules_ruby_dependencies()
-ruby_register_toolchains()
+rules_ruby_select_sdk()
 
-load("@rules_ruby//ruby:defs.bzl", "rb_bundle")
-rb_bundle(
+load("@rules_ruby//ruby:defs.bzl", "ruby_bundle")
+ruby_bundle(
     name = "protobuf_bundle",
     bundler_version = "2.3.17",
+    srcs = ["//ruby:google-protobuf.gemspec"],
     gemfile = "//ruby:Gemfile",
-    gemfile_lock = "//ruby:Gemfile.lock",
-    gemspec = "//ruby:google-protobuf.gemspec",
-    full_index = True,
 )
 
 load("@upb//bazel:workspace_deps.bzl", "upb_deps")

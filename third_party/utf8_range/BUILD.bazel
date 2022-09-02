@@ -10,7 +10,10 @@ cc_library(
         "range2-neon.c",
         "range2-sse.c",
     ],
-    visibility = ["//:__pkg__"],
+    visibility = [
+        "//:__pkg__",
+        "//ruby:__pkg__",
+    ],
 )
 
 filegroup(

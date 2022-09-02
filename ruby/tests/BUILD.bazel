@@ -1,8 +1,8 @@
 load("//:protobuf.bzl", "internal_ruby_proto_library")
 load("@rules_pkg//:mappings.bzl", "pkg_files", "strip_prefix")
-load("@rules_ruby//ruby:defs.bzl", "rb_library", "rb_test")
+load("@rules_ruby//ruby:defs.bzl", "ruby_library", "ruby_test")
 
-rb_library(
+ruby_library(
     name = "common_tests",
     srcs = ["common_tests.rb"],
 )
@@ -15,7 +15,7 @@ filegroup(
   ],
 )
 
-rb_test(
+ruby_test(
     name = "basic",
     deps = [
         ":common_tests",
@@ -26,7 +26,7 @@ rb_test(
     srcs = ["basic.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "basic_proto2",
     deps = [
         ":common_tests",
@@ -37,7 +37,7 @@ rb_test(
     srcs = ["basic_proto2.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "encode_decode_test",
     deps = [
         ":common_tests",
@@ -48,7 +48,7 @@ rb_test(
     srcs = ["encode_decode_test.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "gc_test",
     deps = [
         ":common_tests",
@@ -59,7 +59,7 @@ rb_test(
     srcs = ["gc_test.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "generated_code_test",
     deps = [
         ":common_tests",
@@ -70,7 +70,7 @@ rb_test(
     srcs = ["generated_code_test.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "multi_level_nesting_test",
     deps = [
         ":common_tests",
@@ -81,7 +81,7 @@ rb_test(
     srcs = ["multi_level_nesting_test.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "repeated_field_test",
     deps = [
         ":common_tests",
@@ -92,7 +92,7 @@ rb_test(
     srcs = ["repeated_field_test.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "ruby_version",
     deps = [
         ":common_tests",
@@ -103,7 +103,7 @@ rb_test(
     srcs = ["ruby_version.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "stress",
     deps = [
         ":common_tests",
@@ -114,7 +114,7 @@ rb_test(
     srcs = ["stress.rb"],
 )
 
-rb_test(
+ruby_test(
     name = "type_errors",
     deps = [
         ":common_tests",

@@ -3,7 +3,7 @@ load("@bazel_skylib//lib:collections.bzl", "collections")
 load("@rules_cc//cc:defs.bzl", "cc_library", "objc_library")
 load("@rules_proto//proto:defs.bzl", "ProtoInfo")
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
-load("@rules_ruby//ruby:defs.bzl", "rb_library")
+load("@rules_ruby//ruby:defs.bzl", "ruby_library")
 
 def _GetPath(ctx, path):
     if ctx.label.workspace_root:
@@ -546,7 +546,7 @@ def internal_ruby_proto_library(
         tags = ["manual"],
     )
 
-    rb_library(
+    ruby_library(
         name = name,
         srcs = [name + "_genproto"],
         deps = [default_runtime],
