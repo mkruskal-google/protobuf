@@ -34,10 +34,10 @@ http_archive(
 )
 
 # TODO(mkruskal) Delete this before merging, it's for local dev only.
-#local_repository(
-#    name = "rules_ruby",
-#    path = "../rules_ruby",
-#)
+local_repository(
+    name = "rules_ruby",
+    path = "../rules_ruby",
+)
 
 # Load common dependencies.
 load("//:protobuf_deps.bzl", "PROTOBUF_MAVEN_ARTIFACTS", "protobuf_deps")
@@ -75,9 +75,9 @@ kotlin_repositories()
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 kt_register_toolchains()
 
-load("@rules_ruby//ruby:deps.bzl", "rules_ruby_select_sdk", "rules_ruby_dependencies")
+load("@rules_ruby//ruby:deps.bzl", "rules_ruby_dependencies", "rules_ruby_register_toolchains")
 rules_ruby_dependencies()
-rules_ruby_select_sdk()
+rules_ruby_register_toolchains("system")
 
 load("@rules_ruby//ruby:defs.bzl", "ruby_bundle")
 ruby_bundle(

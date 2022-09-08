@@ -11,16 +11,6 @@ load("//conformance:defs.bzl", "conformance_test")
 # Ruby Runtime
 ################################################################################
 
-config_setting(
-    name = "java_ruby",
-    values = {"define": "ruby_platform=java"},
-)
-
-config_setting(
-    name = "c_ruby",
-    values = {"define": "ruby_platform=c"},
-)
-
 ruby_library(
     name = "protobuf",
     deps = ["//ruby/lib/google:protobuf_lib"],
@@ -51,7 +41,7 @@ conformance_test(
     testee = "//conformance:conformance_ruby",
     text_format_failure_list = "//conformance:text_format_failure_list_ruby.txt",
     target_compatible_with = select({
-        ":java_ruby": ["@platforms//:incompatible"],
+        "@rules_ruby//ruby/runtime:config_jruby": ["@platforms//:incompatible"],
         "//conditions:default": [],
     }),
 )
@@ -62,7 +52,7 @@ conformance_test(
     testee = "//conformance:conformance_ruby",
     text_format_failure_list = "//conformance:text_format_failure_list_jruby.txt",
     target_compatible_with = select({
-        ":java_ruby": [],
+        "@rules_ruby//ruby/runtime:config_jruby": [],
         "//conditions:default": ["@platforms//:incompatible"],
     }),
 )
