@@ -208,6 +208,21 @@ set(libprotobuf_hdrs
 
 # //pkg:protobuf_lite
 set(libprotobuf_lite_srcs
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/escaping.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/ostringstream.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/utf8.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/barrier.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/blocking_counter.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/create_thread_identity.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/per_thread_sem.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/waiter.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/mutex.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/notification.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/civil_time.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/clock.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/duration.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/format.cc
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/time.cc
   ${protobuf_SOURCE_DIR}/src/google/protobuf/any_lite.cc
   ${protobuf_SOURCE_DIR}/src/google/protobuf/arena.cc
   ${protobuf_SOURCE_DIR}/src/google/protobuf/arena_config.cc
@@ -238,6 +253,25 @@ set(libprotobuf_lite_srcs
 
 # //pkg:protobuf_lite
 set(libprotobuf_lite_hdrs
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/container/flat_hash_set.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/numeric/bits.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/numeric/internal/bits.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/char_map.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/escaping.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/ostringstream.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/resize_uninitialized.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/strings/internal/utf8.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/barrier.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/blocking_counter.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/create_thread_identity.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/futex.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/per_thread_sem.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/internal/waiter.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/mutex.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/synchronization/notification.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/civil_time.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/clock.h
+  ${protobuf_SOURCE_DIR}/../com_google_absl/absl/time/time.h
   ${protobuf_SOURCE_DIR}/src/google/protobuf/any.h
   ${protobuf_SOURCE_DIR}/src/google/protobuf/arena.h
   ${protobuf_SOURCE_DIR}/src/google/protobuf/arena_config.h

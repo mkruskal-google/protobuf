@@ -398,3 +398,35 @@ Example:
     ],
     fragments = ["cpp"],
 )
+
+def cc_dist_library_wrapper(
+        name,
+        deps,
+        linkopts,
+        **kwargs):
+    """Bazel rule to wrap up an inline bash script in a binary.
+
+    This is most useful as a stop-gap solution for migrating off Autotools.
+    These binaries are likely to be non-hermetic, with implicit system
+    dependencies.
+
+    NOTE: the rule is only an internal workaround. The interface may change and
+    the rule may be removed when everything is properly "Bazelified".
+
+    Args:
+      name: the name of the inline_sh_binary.
+      deps:
+      linkopts:
+      **kwargs: other keyword arguments that are passed to sh_binary.
+    """
+    cc_dist_library(
+        name = name + "_wrapper",
+        deps = deps + [name],
+        linkopts = linkopts,
+        visibility = ["//pkg:__pkg__"],
+    )
+    native.cc_library(
+        name = name,
+        deps = deps,
+        **kwargs,
+    )
