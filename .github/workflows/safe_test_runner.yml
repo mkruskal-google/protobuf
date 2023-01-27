@@ -1,0 +1,27 @@
+on:
+  pull_request:
+    types: [labeled, opened, reopened, synchronize]
+
+jobs:
+  run-safe:
+    name: Trigger all tests
+    runs-on: ubuntu-latest
+    if: github.event.action == 'labeled' && github.event.label.name == 'safe for tests'
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.rerunWorkflow({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: 46507664
+            })
+
+  remove-label:
+    name: Invalidate safety label
+    if: github.event.action != 'labeled'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          labels: safe for tests
