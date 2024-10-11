@@ -1,0 +1,25 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//upb/cmake:build_defs.bzl", "staleness_test")
+
+py_binary(
+    name = "make_dependencies",
+    srcs = ["make_dependencies.py"],
+)
+
+genrule(
+    name = "generate_dependencies",
+    srcs = ["//:MODULE.bazel"],
+    outs = ["generated-in/dependencies.cmake"],
+    cmd = "$(location :make_dependencies) " +
+          "$(location //:MODULE.bazel) $@",
+    tools = [":make_dependencies"],
+)
+
+staleness_test(
+    name = "test_dependencies_staleness",
+    outs = [
+        "dependencies.cmake",
+    ],
+    generated_pattern = "generated-in/%s",
+    tags = ["manual"],
+)

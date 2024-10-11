@@ -28,22 +28,6 @@ py_library(
     visibility = ["//visibility:public"],
 )
 
-py_binary(
-    name = "make_cmakelists",
-    srcs = ["make_cmakelists.py"],
-)
-
-genrule(
-    name = "gen_cmakelists",
-    srcs = [
-        "//upb:BUILD",
-    ],
-    outs = ["generated-in/CMakeLists.txt"],
-    cmd = "$(location :make_cmakelists) " +
-          "$(location //upb:BUILD) $@",
-    tools = [":make_cmakelists"],
-)
-
 genrule(
     name = "copy_protos",
     srcs = [
@@ -61,7 +45,6 @@ genrule(
 staleness_test(
     name = "test_generated_files",
     outs = [
-        "CMakeLists.txt",
         "google/protobuf/descriptor.upb.h",
         "google/protobuf/descriptor.upb_minitable.c",
         "google/protobuf/descriptor.upb_minitable.h",
