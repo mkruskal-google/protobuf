@@ -398,6 +398,7 @@ void ForkPipeRunner::SpawnTestProgram() {
     }
     argv.push_back(nullptr);
     // Never returns.
+    ABSL_LOG(ERROR) << executable_;
     CHECK_SYSCALL(execv(executable.get(), const_cast<char **>(argv.data())));
   }
 }

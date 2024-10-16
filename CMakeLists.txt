@@ -289,6 +289,8 @@ include_directories(
   ${protobuf_BINARY_DIR}/src
   ${protobuf_SOURCE_DIR}/src)
 
+set(protobuf_FETCH_DEPENDENCIES OFF CACHE BOOL "Fetch dependencies")
+
 set(protobuf_ABSL_PROVIDER "module" CACHE STRING "Provider of absl library")
 set_property(CACHE protobuf_ABSL_PROVIDER PROPERTY STRINGS "module" "package")
 

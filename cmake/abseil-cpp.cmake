@@ -13,6 +13,20 @@ endif()
 if(TARGET absl::strings)
   # If Abseil is included already, skip including it.
   # (https://github.com/protocolbuffers/protobuf/issues/10435)
+elseif (protobuf_FETCH_DEPENDENCIES OR protobuf_ABSL_PROVIDER STREQUAL "fetch")
+  include(${protobuf_SOURCE_DIR}/cmake/dependencies.cmake)
+  include(FetchContent)
+  FetchContent_Declare(
+    absl
+    GIT_REPOSITORY "https://github.com/abseil/abseil-cpp.git"
+    GIT_TAG "${abseil-cpp-version}"
+  )
+  if(protobuf_INSTALL)
+    # When protobuf_INSTALL is enabled and Abseil will be built as a module,
+    # Abseil will be installed along with protobuf for convenience.
+    set(ABSL_ENABLE_INSTALL ON)
+  endif()
+  FetchContent_MakeAvailable(absl)
 elseif(protobuf_ABSL_PROVIDER STREQUAL "module")
   if(NOT ABSL_ROOT_DIR)
     set(ABSL_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp)
